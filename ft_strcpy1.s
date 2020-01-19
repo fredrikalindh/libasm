@@ -10,17 +10,16 @@ _ft_strcpy:
 	je	_null
 	cmp rsi, 0 ; if srcs == NULL
 	je _null
-	mov rax, rdi
-
-_loop:
-	cmp byte [rsi], 0x0
-	je end
-	mov		al, byte [rsi]
-	mov		byte [rdi], al
+	mov rax, rsi
+_str_cpy1:
+	; mov rsp, [rsi] ; cpy value ?
+	mov rdx, [rdi] ; cpy value ?
+	mov [rsi], rdx ; cpy value ?
 	inc rsi ; increment both
 	inc rdi
-	jmp _loop
+	cmp [rdi], byte 0 ; if *src == \0
+	jne _str_cpy1
+	je _end
 
-end:
-	mov [rdi], byte 0x0
+_end:
 	ret
