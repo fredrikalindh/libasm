@@ -6,7 +6,7 @@
 /*   By: frlindh <frlindh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 16:16:04 by frlindh           #+#    #+#             */
-/*   Updated: 2020/01/20 21:34:17 by frlindh          ###   ########.fr       */
+/*   Updated: 2020/01/20 22:13:54 by frlindh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int ac, char const *av[])
 	}
 
 	printf("\nADDRESS OF dest3 %p\nand of dest %p\n", dest3, dest);
-	dest3 = ft_strdup(dest);
+	dest3 = ft_strdup(av[1]);
 	printf("address of strdup: %p\nSTRDUP: \"%s\"\n",  dest3, dest3);
 
 	return 0;
