@@ -6,12 +6,12 @@
 #    By: frlindh <frlindh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/19 16:19:49 by frlindh           #+#    #+#              #
-#    Updated: 2020/01/19 22:18:03 by frlindh          ###   ########.fr        #
+#    Updated: 2020/01/20 20:09:05 by frlindh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libasm.a
-SRCS = ft_read.s ft_strcpy.s ft_strcmp.s ft_strlen.s ft_strdup.s ft_write.s ft_read.s
+SRCS = ft_read.s ft_strcpy.s ft_strcmp.s ft_strlen.s ft_strdup.s ft_write.s
 OBJS = $(patsubst %.s, %.o, $(SRCS))
 NASM = nasm
 
@@ -20,7 +20,7 @@ NASM = nasm
 all: $(NAME)
 
 test: $(OBJS)
-	gcc main.c ft_strlen.o ft_strcpy.o ft_strcmp.o -o test
+	gcc main.c $(OBJS) -o test
 
 $(NAME): $(OBJS)
 	ar rcs $@ $^

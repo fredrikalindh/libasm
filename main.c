@@ -6,31 +6,64 @@
 /*   By: frlindh <frlindh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 16:16:04 by frlindh           #+#    #+#             */
-/*   Updated: 2020/01/19 22:30:20 by frlindh          ###   ########.fr       */
+/*   Updated: 2020/01/20 21:34:17 by frlindh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "libasm.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 int main(int ac, char const *av[])
 {
-	(void)ac;
 	int i;
 	char *dest;
-	char *dest2;
-
+	char *dest2 = "f";
+	char *dest3;
+	char buf[100];
+	int	ret;
+	int	fd;
 
 	i = ft_strlen(av[1]);
-	dest = (char *)malloc(sizeof(i));
-	dest2 = "fredrika lindhfagaga";
-	printf("ADR DST 1: %p: %s\n", dest, dest);
+	ft_write(1, "Your string: ", 13);
+	ft_write(1, av[1], i);
+	ft_write(1, "\n", 1);
+
+	dest = (char *)malloc(i);
+	printf("ADR DST 1: %p\n", dest);
 	ft_strcpy(dest, av[1]);
 	printf("ADR SRC:   %p \nADR DST 2: %p: %s\n", av[1], dest, dest);
 	printf("Length of string [%s] is %d\nand the copy of the string is: \"%s\" \n", av[1], i, dest);
 
-	printf("Diffrence between \"%s\" & \"%s\" is %d", dest, dest2, ft_strcmp(dest2, dest));
+	printf("COMPARE \"\" and \"\" equals %d with mine and %d with real\n", ft_strcmp("\xfe", "\xfe\xff"), strcmp("\xfe", "\xfe\xff"));
+	printf("COMPARE \"h\" and \"h\" equals %d with mine and %d with real\n", ft_strcmp("h", "h"), strcmp("h", "h"));
+
+
+	printf("COMPARE \"\" and \"\" equals %d with mine and %d with real\n", ft_strcmp("", ""), strcmp("", ""));
+	printf("COMPARE \"h\" and \"h\" equals %d with mine and %d with real\n", ft_strcmp("h", "h"), strcmp("h", "h"));
+	printf("COMPARE \"TEST\" and \"test\" equals %d with mine and %d with real\n", ft_strcmp("TEST", "test"), strcmp("TEST", "test"));
+	printf("COMPARE \"test\" and \"TEST\" equals %d with mine and %d with real\n", ft_strcmp("test", "TEST"), strcmp("test", "TEST"));
+	printf("COMPARE \"A\" and \"%s\" equals %d with mine and %d with real\n", dest, ft_strcmp("A", dest), strcmp("A", dest));
+	printf("COMPARE \"%s\" and \"A\" equals %d with mine and %d with real\n", dest, ft_strcmp(dest, "A"), strcmp(dest, "A"));
+
+
+	if (ac > 2)
+	{
+		printf("\nREAD FILE: \n");
+		fd = open(av[2], O_RDWR);
+		ret = ft_read(fd, buf, 101);
+		buf[ret] = '\0';
+		write(1, buf, ret - 1);
+	}
+
+	printf("\nADDRESS OF dest3 %p\nand of dest %p\n", dest3, dest);
+	dest3 = ft_strdup(dest);
+	printf("address of strdup: %p\nSTRDUP: \"%s\"\n",  dest3, dest3);
+
 	return 0;
 }

@@ -15,13 +15,17 @@ _ft_strcmp:
 end:
 	cmp r15b, [rsi]
 	je equal
-	jnc big
-	jc small
+	jg big
+	jl small
 big:
-	mov rax, 1
+	mov ax, [rdi]
+	sub ax, [rsi]
 	ret
 small:
-	mov rax, -1
+	mov ax, [rsi]
+	sub ax, [rdi]
+	not rax
+	inc rax
 	ret
 equal:
 	mov rax, 0
