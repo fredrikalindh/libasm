@@ -7,9 +7,6 @@ _ft_strlen_t:
 	je _end
 	inc rdi
 	jmp _ft_strlen_t
-_null:
-	mov rax, -1
-	ret
 _end:
 	sub rdi, rcx
 	mov rax, rdi
